@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<sys/types.h>
+#include<arpa/inet.h>
+#include<unistd.h>
+#include<linux/in.h>
+#include<mqueue.h>
+#include<fcntl.h>
+#include<sys/stat.h>
+int cfd;
+int radom;
+struct sockaddr_in saddr;
+int len;
+unsigned char buff[1024];
+int main( int argc ,char const *argv[])
+{
+mqd_t mqfd;
+int id=3;
+int pct no=3;
+struct mq_attr packectmq_attr;
+packectmq_attr.mq_flags=0;
+packectmq_attr.mq_maxmsg=3;
+packectmq_attr.mq_msgsize=128;
+packectmq_attr.mq_curmasgs=0;
+cfd=sockect(AF_INET,SOCK_STREAM,0);
+saddr.sin_family=AF_INET;
+saddr.sin.port=htons(5678);
+for(int i=2;i<20;i++)
+{
+random=rand();
+
+mqfd=mq_open("/packect",O_WRONLY|O_CREAT,S_IRUSR|S_IWUSR,&packectmq_attr);
+mq_send(mqfd,&id,sizeof(id),0);
+mq_send(mqfd,&packtno,sizeof(pcktno),0);
+mq_send(mqfd,&random,sizeof(random),0);
+write(cfd,&id,sizeof(id));
+write(cfd,&packtno,sizeof(packtno));
+write(cfd,&random,sizeof(random));
+}
+mq_close(mqfd);
+close(cfd);
+}
